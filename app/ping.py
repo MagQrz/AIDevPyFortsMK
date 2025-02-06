@@ -2,9 +2,9 @@ import math
 from ping3 import ping
 
 class Ping:
-    # Ping-funktion
+    # Ping-function
     def ping_host(self, ip, location):
-        latency = ping(ip, timeout=2)  # 2-sekunder timeout för bättre resultat
+        latency = ping(ip, timeout=2)  # 2-second timeout gives higher success rate
 
         num = latency * 1000  # Float
         num_str = str(num)  # Convert to string

@@ -1,9 +1,6 @@
 import sqlite3
 import os
-
 from config import Config
-
-#DB_PATH = "/Users/magnuskurtz/2024/Programmering/Prog1Code/2025MagKurPythFortsExam/db_storage/ping_results.db"
 
 class Database:
 
@@ -24,7 +21,7 @@ class Database:
         conn.commit()
         return conn
 
-    # Spara resultaten i databasen
+    # Save result in database
     def store_result(self, conn, data):
         cursor = conn.cursor()
         cursor.execute("""

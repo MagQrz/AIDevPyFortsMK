@@ -9,14 +9,13 @@ app = Flask(__name__)
 def get_data():
     conn = sqlite3.connect(DB_PATH)        
     query = "SELECT location, DATETIME(timestamp, '+7 hours') AS timestamp_bkk, latency_ms FROM ping_data_compare ORDER BY location, timestamp_bkk DESC"
-    df = pd.read_sql_query(query, conn)
+    df = pd.read_sql_query(query, conn) # row above convert timestamp from UTC to Bangkok time
     conn.close()
 
     # Konvertera timestamp till datetime
     df['timestamp_bkk'] = pd.to_datetime(df['timestamp_bkk'])
     #df = df.sort_values(by='timestamp_bkk')  # Sort by time
     df = df.sort_values(by=['location', 'timestamp_bkk'])  # Sort by location and time
-    #print(df)
 
     return df
 
@@ -34,16 +33,15 @@ def data():
 
     # Sort by location first, then timestamp
     df = df.sort_values(by=['location', 'timestamp_bkk'])
-    #print(df)
 
-    # Skapa, unik timestamp list för x-axis
+    # Create unique timestamp list för x-axis
     all_timestamps = sorted(df["timestamp_bkk"].dt.strftime('%Y-%m-%d %H:%M:%S').unique())
 
     # Group data by location
     grouped = df.groupby("location")
     data = {"timestamps": all_timestamps}  # Shared X-axis timestamps
 
-    # Säkra att varje location's data matchar delad/samma timestamps
+    # Secure every location's data match shared timestamps
     for location, group in grouped:
         latency_dict = dict(zip(group["timestamp_bkk"].dt.strftime('%Y-%m-%d %H:%M:%S'), group["latency_ms"]))        
         # Fill missing timestamps with None (ensures data aligns correctly)
@@ -54,7 +52,6 @@ def data():
             "latency": latency_list
         }
 
-    #print("Sending Data:", data)  # Debugging
     return jsonify(data)
 
 if __name__ == "__main__":

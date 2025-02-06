@@ -5,7 +5,6 @@ from config import Config
 from slask.flask_app import FlaskApp
 import sqlite3
 
-#DB_PATH = "/Users/magnuskurtz/2024/Programmering/Prog1Code/2025MagKurPythFortsExam/db_storage/ping_results.db"
 
 class App:
 
@@ -13,10 +12,11 @@ class App:
         
         self.ping = Ping()
         self.db = Database()
+        self.config = Config()
 
     def run(self):
         conn = sqlite3.connect(Config.DB_PATH)   
-        #self.db.setup_database()     
+        #self.db.setup_database() Run one time only
     
         # Lista på IPs Asien(lokalt), Sverige och USA
         ip_list = [
