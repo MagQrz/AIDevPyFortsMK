@@ -21,7 +21,7 @@ H. **SQL** with Python ✅
 
 ## Service process
 
-| Ping IP addresses in Asia(local) | Store in database witt **SQL** sqlite, choose to put the database-url in a config file that is included in .gitignore to show that I master basic parts of **secure programming** | Create **automation** with cron job on Mac | Then publish to webb on local_host by collecting dataframe from sqlite by using **Flask**, then use **Pandas** to tweak, convert and sort data, and finally use **JSON**/jsonify (Flask function) to convert the Python objects (like the dataframe / dictionaries or lists) into JSON responses, which is then returned from the Flask route to the html-template as foundation to the graphs.| 
+| Ping IP addresses in Asia(local), Stockholm and USA | Store in database witt **SQL** sqlite, choose to put the database-url in a config file that is included in .gitignore to show that I master basic parts of **secure programming** | Create **automation** with cron job on Mac | Then publish to webb on local_host by collecting dataframe from sqlite by using **Flask**, then use **Pandas** to tweak, convert and sort data, and finally use **JSON**/jsonify (Flask function) to convert the Python objects (like the dataframe / dictionaries or lists) into JSON responses, which is then returned from the Flask route to the html-template as foundation to the graphs.| 
 
 ## Service file flow architecture
 
@@ -29,11 +29,11 @@ H. **SQL** with Python ✅
 | **main** | => | /app/__init__.py | => | /app/ping.py | => | /app/db.py |  
   
 ***Web publishing***  
-| /app/webben.py |
-|    
-|    
-|    
-|  
+| /app/webben.py |  
+.    
+.    
+.    
+.  
 
 #### Terminal and class examples
 
