@@ -31,7 +31,7 @@ H. **SQL** with Python ✅
 ***Web publishing***  
 | /app/webben.py |  
 ## View the result
-Look at the file Graphs.png uploaded here in the repository. 
+Look at web result example in the file Graphs.png uploaded here in the repository.  
 .    
 .    
 .    
