@@ -17,7 +17,7 @@ H. **SQL** with Python ✅
 
 ## Pre service process
 
-| Create database| Test database select and ping function with **pytest** |
+| Create database | Test database select and ping function with **pytest** |
 
 ## Service process
 
