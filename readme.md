@@ -30,11 +30,19 @@ H. **SQL** with Python ✅
   
 ***Web publishing***  
 | /app/webben.py |  
-## View the result
-Look at web result example in the file Graphs.png uploaded here in the repository.  
+## View cron job setup and web result
+Here is the setup for the cron job running every 10 minutes.  
+![Cron job log file](images/cronjob_cmd.png)  
+
+Here is a screen dump showing cron job running every 10 minutes.  
+![Cron job log file](images/cronjob.png) 
+  
+And here is a screen dump of web result.  
+  
+![Web presentation](images/web.png)
 .    
-.    
-.    
+.  
+.  
 .  
 
 #### Terminal and class examples
