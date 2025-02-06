@@ -2,7 +2,7 @@
 ## Background
 I work from Bangkok, sometimed from home (with and without VPN), and sometimes from office with dedicated VPN.
 We experience that performace vary up and down, sometimes a pattern over the day, and sometimes decreased performance occasionally. To see if any conclusions can be drawn, I want to measure over time and have the data presented with a curve over time. I want to measure locally (Thailand/Bangkok) and against Europe/Sweden and the USA.
-## Metod
+## Method
 By using the appropriate ping library in python, data regarding latency (in milliseconds [ms]) is provided. I store this in a sqlite database, to get continous data I automice with a cron job. I then use flask to present the data. I test some of the functionality with pytest. To make code a bit safer - I save the db url in a config file that is then excluded from github repository by gitignore.
 ## Parts involved
 
@@ -30,6 +30,8 @@ H. **SQL** with Python ✅
   
 ***Web publishing***  
 | /app/webben.py |  
+## View the result
+Look at the file Graphs.png uploaded here in the repository. 
 .    
 .    
 .    
