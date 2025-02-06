@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latency Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>  <!-- ✅ Date adapter fix -->
+</head>
+<body>
+    <div style="width: 80%; margin: auto; padding: 20px;">
+        <h1>Latency [ms] Over Time (From Bkk to Bkk/Stockholm/US) - Bangkok Time (UTC+7)</h1>
+        <canvas id="latencyChart"></canvas>
+    </div>
+
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch('/data');
+                if (!response.ok) {
+                    throw new Error("Failed to fetch data");
+                }
+                const data = await response.json();
+                console.log("Received Data:", data);
+                return data;
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+    
+        async function createChart() {
+            const data = await fetchData();
+            if (!data || !data.timestamps.length) {
+                console.error("No data received or empty timestamps.");
+                return;
+            }
+    
+            console.log("Creating Chart with Data:", data);
+    
+            const ctx = document.getElementById('latencyChart').getContext('2d');
+    
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.timestamps,  // ✅ Shared timestamps for all locations
+                    datasets: [
+                        {
+                            label: 'Bangkok',
+                            data: data.Bangkok ? data.Bangkok.latency : [],
+                            borderColor: 'rgba(255, 99, 132, 1)',  // Red
+                            borderWidth: 2,
+                            fill: false,
+                            spanGaps: true  // ✅ Allows gaps where data is missing
+                        },
+                        {
+                            label: 'Stockholm',
+                            data: data.Stockholm ? data.Stockholm.latency : [],
+                            borderColor: 'rgba(54, 162, 235, 1)',  // Blue
+                            borderWidth: 2,
+                            fill: false,
+                            spanGaps: true
+                        },
+                        {
+                            label: 'USA',
+                            data: data.USA ? data.USA.latency : [],
+                            borderColor: 'rgba(75, 192, 192, 1)',  // Green
+                            borderWidth: 2,
+                            fill: false,
+                            spanGaps: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                tooltipFormat: 'eee MMM d HH:mm',  // Tooltip format
+                                unit: 'hour',  // ✅ Ensures x-axis ticks are at whole hours
+                                stepSize: 3,  // ✅ Ensures the tick interval is exactly 6 hours
+                                displayFormats: {
+                                    hour: 'eee MMM d HH:mm'  // ✅ Formats x-axis labels correctly
+                                }
+                            },
+                            min: data.timestamps[0],  // ✅ Start x-axis at the first timestamp
+                            max: data.timestamps[data.timestamps.length - 1],  // ✅ Ensure full range
+                            title: {
+                                display: true,
+                                text: 'Time (Bangkok Time - UTC+7)'
+                            },
+                            ticks: {
+                                source: 'auto',  // Ensures automatic tick placement
+                                autoSkip: false,  // Prevents Chart.js from skipping labels
+                                callback: function(value, index, values) {
+                                    const date = new Date(value);
+                                    const formattedDate = new Intl.DateTimeFormat('en-GB', {
+                                        weekday: 'short',  // e.g., "Wed"
+                                        month: 'short',    // e.g., "Feb"
+                                        day: 'numeric',    // e.g., "5"
+                                        hour: '2-digit',   // e.g., "12"
+                                        minute: '2-digit', // e.g., "00"
+                                        hour12: false      // Ensures 24-hour format
+                                    }).format(date);
+                                    
+                                    const hour = date.getHours();
+                                    return (hour === 0 || hour === 3 || hour === 6 || hour === 9 || hour === 12 || hour === 15 || hour === 18 || hour === 21) ? formattedDate : '';
+                                }
+                            }
+                        },
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Latency (ms)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    
+        createChart();
+    </script>
+</body>
+</html>
