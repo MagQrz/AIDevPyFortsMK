@@ -1,19 +1,19 @@
 # Internet performace/latency app
 ## Background
-I work from Bangkok, sometimed from home (with and without VPN), and sometimes from office with dedicated VPN.
-We experience that performace vary up and down, sometimes a pattern over the day, and sometimes decreased performance occasionally. To see if any conclusions can be drawn, I want to measure over time and have the data presented with a curve over time. I want to measure locally (Thailand/Bangkok) and against Europe/Sweden and the USA.
+I am in Bangkok, sometimed code from home (with and without VPN), and sometimes from co-working space with dedicated VPN.
+I have experienced that performace vary up and down, sometimes a pattern over the day, and sometimes decreased performance occasionally. To see if any conclusions can be drawn, I want to measure over time and have the data presented with a curve over time. I want to measure locally (Thailand/Bangkok) and against Europe/Sweden and the USA.
 ## Method
 By using the appropriate ping library in python, data regarding latency (in milliseconds [ms]) is provided. I store this in a sqlite database, to get continous data I automice with a cron job. I then use flask to present the data. I test some of the functionality with pytest. To make code a bit safer - I save the db url in a config file that is then excluded from github repository by gitignore.
 ## Parts involved
 
 A. **Secure Programming** ✅  
-B. Advanced Data Management (**Pandas**, NumPy) ✅  
-C. API Integrations (Requests, **JSON**) ✅  
-D. Web Development (**Flask**, Django) ✅  
-E. **Automation** or Multithreading ✅  
-F. Unit Testing and Debugging (**pytest**, logging) ✅  
+B. Advanced Data Management (<b style="color:blue;">**Pandas**</b>, NumPy) ✅  
+C. API Integrations (Requests, <b style="color:blue;">**JSON**</b>) ✅  
+D. Web Development (<b style="color:blue;">**Flask**</b>, Django) ✅  
+E. <b style="color:blue;">**Automation**</b> or Multithreading ✅  
+F. Unit Testing and Debugging (<b style="color:blue;">**pytest**</b>, logging) ✅  
 G. File Management or Encryption  
-H. **SQL** with Python ✅  
+H. <b style="color:blue;">**SQL**</b> with Python ✅  
 
 ## Pre service process
 
